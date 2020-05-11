@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+mongoose.set('useFindAndModify', false)
 
 // Import of the model Recipe from './models/Recipe.model.js'
 const Recipe = require('./models/Recipe.model');
@@ -17,7 +18,7 @@ mongoose
   .then(self => {
     console.log(`Connected to the database: "${self.connection.name}"`);
     // Before adding any documents to the database, let's delete all previous entries
-    return self.connection.dropDatabase();
+    // return self.connection.dropDatabase();
   })
   .then(() => {
     // Run your code here, after you have insured that the connection was made
@@ -25,3 +26,29 @@ mongoose
   .catch(error => {
     console.error('Error connecting to the database', error);
   });
+ 
+  
+let brisket = new Recipe ({
+  title: 'Sam'
+
+})
+
+
+brisket.save()
+.then((res) => console.log(res))
+.catch((err) => console.log(err))
+
+Recipe.insertMany(data)
+.then((res)=>{
+  console.log(res)
+  let query = {title:"Asian Glazed Chicken Thighs"}
+
+
+Recipe.findOneAndUpdate(query,{duration:300}, {new:true})
+.then((res)=> console.log(res))
+.catch((err) => console.log(err))
+})
+.catch((err)=>console.log(err))
+
+
+
